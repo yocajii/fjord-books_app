@@ -36,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "i18n_generators", "~> 2.2"
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-fjord', require: false
@@ -56,3 +57,4 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'carrierwave'
+
