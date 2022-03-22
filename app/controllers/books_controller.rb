@@ -8,7 +8,6 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
-    @locale = I18n.locale
   end
 
   # GET /books/1
