@@ -1,4 +1,20 @@
 en:
+  functions:
+    index: Books
+    edit: Edit
+    back: Back
+    show: Show
+    destroy: Destroy
+    add: New Book
+
+  messages:
+    success:
+      create: 'Book was successfully created.'
+      update: 'Book was successfully updated.'
+      destroy: 'Book was successfully destroyed.'
+    confirm:
+      destroy: 'Are you sure?'
+
   activerecord:
     models:
       book: Book  #g
