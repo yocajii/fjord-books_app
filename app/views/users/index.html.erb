@@ -1,12 +1,28 @@
-<h1>All Users</h1>
+<h1><%= User.model_name.human %></h1>
 
-<ul class="users">
+<table>
+  <thead>
+  <tr>
+    <th><%= User.human_attribute_name(:email) %></th>
+    <th><%= User.human_attribute_name(:postcode) %></th>
+    <th><%= User.human_attribute_name(:address) %></th>
+    <th><%= User.human_attribute_name(:self_introduction) %></th>
+  </tr>
+  </thead>
+
+  <tbody>
   <% @users.each do |user| %>
-    <li>
-      <%= link_to user.email, user %>
-      <%#= user.email %>
-    </li>
+    <tr>
+      <td><%= link_to user.email, user %></td>
+      <td><%= user.postcode %></td>
+      <td><%= user.address %></td>
+      <td><%= user.self_introduction %></td>
+    </tr>
   <% end %>
-</ul>
+  </tbody>
+</table>
 
 <%= paginate @users %>
+
+<br>
+<%= link_to t('views.common.back'), books_path %>

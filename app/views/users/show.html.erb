@@ -1,4 +1,4 @@
-<h2>ユーザー詳細</h2>
+<h2><%= t 'labels.user.show' %></h2>
 
 <p>
   <strong><%= User.human_attribute_name(:email) %>:</strong>
@@ -19,3 +19,5 @@
   <strong><%= User.human_attribute_name(:self_introduction) %>:</strong>
   <%= simple_format(@user.self_introduction) %>
 </p>
+
+<%= link_to t('views.common.back'), users_path %>
