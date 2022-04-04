@@ -1,0 +1,12 @@
+<h1>All Users</h1>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.email, user %>
+      <%#= user.email %>
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate @users %>
