@@ -15,8 +15,6 @@ ja:
         self_introduction: 自己紹介
   labels:
     user:
-      sign_up: ユーザー登録
       show: ユーザー詳細
       edit: ユーザー編集
-      login: ログイン
       logout: ログアウト

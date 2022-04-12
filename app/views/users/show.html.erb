@@ -17,7 +17,7 @@
 
 <p>
   <strong><%= User.human_attribute_name(:self_introduction) %>:</strong>
-  <%= simple_format(@user.self_introduction) %>
+  <%= sanitize @user.self_introduction.gsub(/(\r\n|\r|\n)/, "<br>"), tags: ['br'] %>
 </p>
 
 <%= link_to t('views.common.back'), users_path %>
