@@ -20,6 +20,6 @@
 
 <div class="field">
   <%= f.label :avatar %>
-  <%= image_tag @user.avatar.variant(resize_to_limit: [240, 240]) if @user.avatar.attached? && @user.avatar.valid? %>
+  <%= image_tag @user.avatar.variant(resize_to_limit: [240, 240]) if @user.avatar.attached? && @user.valid? %>
   <%= f.file_field :avatar %>
 </div>
