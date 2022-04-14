@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     member do
       get :followings, :followers
     end
-    resource :follow_relations, only: %i[create destroy]
+    resource :following_relations, only: %i[create destroy]
   end
 end
