@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 2022_04_15_065907) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
