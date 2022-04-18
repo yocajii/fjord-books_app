@@ -3,12 +3,12 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
-  # GET /reports or /reports.json
+  # GET /reports
   def index
-    @reports = current_user.reports.all
+    @reports = Report.order(:id).page(params[:page])
   end
 
-  # GET /reports/1 or /reports/1.json
+  # GET /reports/1
   def show; end
 
   # GET /reports/new
@@ -17,9 +17,11 @@ class ReportsController < ApplicationController
   end
 
   # GET /reports/1/edit
-  def edit; end
+  def edit
+    redirect_to new_report_path unless @report.user == current_user
+  end
 
-  # POST /reports or /reports.json
+  # POST /reports
   def create
     @report = current_user.reports.new(report_params)
     if @report.save
@@ -29,26 +31,36 @@ class ReportsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reports/1 or /reports/1.json
+  # PATCH/PUT /reports/1
   def update
-    if @report.update(report_params)
+    if @report.user != current_user
+      redirect_to @report
+    elsif @report.update(report_params)
       redirect_to @report, notice: 'Report was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /reports/1 or /reports/1.json
+  # DELETE /reports/1
   def destroy
-    @report.destroy
-    redirect_to reports_url, notice: 'Report was successfully destroyed.'
+    if @report.user != current_user
+      redirect_to @report
+    else
+      @report.destroy
+      redirect_to reports_url, notice: 'Report was successfully destroyed.'
+    end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
+  def set_commentable
+    @commentable = Report.find(params[:id])
+  end
+
   def set_report
-    @report = current_user.reports.find(params[:id])
+    @report = Report.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
