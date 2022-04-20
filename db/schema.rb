@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2022_04_08_082907) do
   end
 
   create_table "following_relations", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.integer "follower_id", null: false
+    t.integer "followed_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followed_id"], name: "index_following_relations_on_followed_id"

@@ -1,13 +1,17 @@
 <h1><%= t('views.common.title_show', name: User.model_name.human) %></h1>
 
-<div>
-  <%= link_to followings_user_path(@user) do %>
-    <span><%= t 'views.following.followings' %><%= @user.followings.count %></span>
-  <% end %>&nbsp;
-  <%= link_to followers_user_path(@user) do %>
-    <span><%= t 'views.following.followers' %><%= @user.followers.count %></span>
-  <% end %>
-</div>
+<ul>
+  <li>
+    <%= link_to followings_user_path(@user) do %>
+      <%= t 'views.following.followings' %><%= @user.followings.count %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to followers_user_path(@user) do %>
+      <%= t 'views.following.followers' %><%= @user.followers.count %>
+    <% end %>
+  </li>
+</ul>
 
 <p>
   <strong><%= User.human_attribute_name(:email) %>:</strong>
