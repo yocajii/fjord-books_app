@@ -1,9 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  memo: MyText
-
+  title: 南総里見八犬伝
+  memo: 伝奇小説
+  author: 曲亭馬琴
 two:
-  title: MyString
-  memo: MyText
+  title: 世間胸算用
+  memo: 浮世草子
+  author: 井原西鶴
