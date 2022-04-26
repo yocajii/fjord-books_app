@@ -4,9 +4,10 @@ require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
   setup do
-    @report = reports(:one)
-    @alice = users(:alice)
-    @bob = users(:bob)
+    FactoryBot.reload
+    @report = create(:report)
+    @alice = @report.user
+    @bob = create(:bob)
   end
 
   test '#editable?' do

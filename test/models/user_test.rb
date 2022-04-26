@@ -3,44 +3,35 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  test '#following?' do
-    alice = users(:alice)
-    bob = users(:bob)
-    assert_not alice.following?(bob)
-    alice.follow(bob)
-    assert alice.following?(bob)
+  setup do
+    FactoryBot.reload
+    @alice = create(:alice)
+    @bob = create(:bob)
+  end
+
+  test '#following?_and_@follow' do
+    assert_not @alice.following?(@bob)
+    @alice.follow(@bob)
+    assert @alice.following?(@bob)
   end
 
   test '#followed_by?' do
-    alice = users(:alice)
-    bob = users(:bob)
-    assert_not bob.followed_by?(alice)
-    alice.follow(bob)
-    assert bob.followed_by?(alice)
-  end
-
-  test '#follow' do
-    me = User.create!(email: 'me@example.com', password: 'password')
-    she = User.create!(email: 'she@example.com', password: 'password')
-    assert_not me.following?(she)
-    me.follow(she)
-    assert me.following?(she)
+    assert_not @bob.followed_by?(@alice)
+    @alice.follow(@bob)
+    assert @bob.followed_by?(@alice)
   end
 
   test '#unfollow' do
-    me = User.create!(email: 'me@example.com', password: 'password')
-    she = User.create!(email: 'she@example.com', password: 'password')
-    me.follow(she)
-    assert me.following?(she)
-    me.unfollow(she)
-    assert_not me.following?(she)
+    relationship = create(:relationship)
+    carol = relationship.following
+    dave = relationship.follower
+    assert dave.following?(carol)
+    dave.unfollow(carol)
+    assert_not dave.following?(carol)
   end
 
   test '#name_or_email' do
-    user = User.new(email: 'foo@example.com', name: '')
-    assert_equal 'foo@example.com', user.name_or_email
-
-    user.name = 'Foo Bar'
-    assert_equal 'Foo Bar', user.name_or_email
+    assert_equal 'アリス', @alice.name_or_email
+    assert_equal 'bob@example.com', @bob.name_or_email
   end
 end
