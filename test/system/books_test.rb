@@ -4,18 +4,18 @@ require 'application_system_test_case'
 
 class BooksTest < ApplicationSystemTestCase
   setup do
-    visit root_url
-    fill_in 'Eメール', with: 'alice@example.com'
-    fill_in 'パスワード', with: 'password'
-    click_button 'ログイン'
+    FactoryBot.reload
+    @book = create(:book)
+    @alice = create(:alice)
+    sign_in(@alice)
   end
 
   test 'visiting the index' do
     visit books_url
     assert_selector 'h1', text: '本'
-    assert_text '世間胸算用'
-    assert_text '浮世草子'
-    assert_text '井原西鶴'
+    assert_text '南総里見八犬伝'
+    assert_text '伝奇小説'
+    assert_text '曲亭馬琴'
   end
 
   test 'creating a Book' do

@@ -13,4 +13,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
+
+  def sign_in(user)
+    visit root_url
+    fill_in 'Eメール', with: user.email
+    fill_in 'パスワード', with: user.password
+    click_button 'ログイン'
+  end
 end

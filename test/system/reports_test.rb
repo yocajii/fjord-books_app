@@ -4,10 +4,10 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
+    FactoryBot.reload
+    @report = create(:report)
     visit root_url
-    fill_in 'Eメール', with: 'alice@example.com'
-    fill_in 'パスワード', with: 'password'
-    click_button 'ログイン'
+    sign_in(@report.user)
   end
 
   test 'visiting the index' do
@@ -15,7 +15,7 @@ class ReportsTest < ApplicationSystemTestCase
 
     assert_selector 'h1', text: '日報'
     within 'table' do
-      assert_text '猫1日目'
+      assert_text '猫の世話'
       assert_text 'アリス'
     end
   end
@@ -24,12 +24,12 @@ class ReportsTest < ApplicationSystemTestCase
     visit reports_url
     click_link '新規作成'
 
-    fill_in 'タイトル', with: '猫3日目'
+    fill_in 'タイトル', with: '爪切りの日'
     fill_in '内容', with: '爪を切った'
     click_button '登録する'
 
     assert_text '日報が作成されました。'
-    assert_text '猫3日目'
+    assert_text '爪切りの日'
     assert_text '爪を切った'
     assert_text 'アリス'
   end
@@ -40,12 +40,12 @@ class ReportsTest < ApplicationSystemTestCase
       click_link '編集', match: :first
     end
 
-    fill_in 'タイトル', with: '猫2日目'
+    fill_in 'タイトル', with: '猫の世話とレクリエーション'
     fill_in '内容', with: 'ブラッシングして紐で遊んだ'
     click_button '更新する'
 
     assert_text '日報が更新されました。'
-    assert_text '猫2日目'
+    assert_text '猫の世話とレクリエーション'
     assert_text 'ブラッシングして紐で遊んだ'
   end
 
@@ -54,8 +54,7 @@ class ReportsTest < ApplicationSystemTestCase
     page.accept_confirm do
       click_link '削除', match: :first
     end
-    take_screenshot
     assert_text '日報が削除されました。'
-    assert_no_text '猫1日目'
+    assert_no_text '猫の世話'
   end
 end
