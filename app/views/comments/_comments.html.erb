@@ -1,7 +1,7 @@
 <hr>
 <h2><%= Comment.model_name.human %></h2>
 <% if commentable.comments.empty? %>
-  <p>コメントはまだありません</p>
+  <p><%= t('views.common.nothing', name: Comment.model_name.human) %></p>
 <% else %>
   <% commentable.comments.each do |comment| %>
     <p>

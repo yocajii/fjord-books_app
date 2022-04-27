@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
     if @report.save
-      redirect_to @report, notice: 'Report was successfully created.'
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class ReportsController < ApplicationController
     if @report.user != current_user
       redirect_to @report
     elsif @report.update(report_params)
-      redirect_to @report, notice: 'Report was successfully updated.'
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,17 +48,13 @@ class ReportsController < ApplicationController
       redirect_to @report
     else
       @report.destroy
-      redirect_to reports_url, notice: 'Report was successfully destroyed.'
+      redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
     end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_commentable
-    @commentable = Report.find(params[:id])
-  end
-
   def set_report
     @report = Report.find(params[:id])
   end
