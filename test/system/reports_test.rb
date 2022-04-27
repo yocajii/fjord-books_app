@@ -6,8 +6,7 @@ class ReportsTest < ApplicationSystemTestCase
   setup do
     FactoryBot.reload
     @report = create(:report)
-    visit root_url
-    sign_in(@report.user)
+    login_as(@report.user, scope: :user)
   end
 
   test 'visiting the index' do

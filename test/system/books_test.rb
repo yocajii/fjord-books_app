@@ -7,7 +7,7 @@ class BooksTest < ApplicationSystemTestCase
     FactoryBot.reload
     @book = create(:book)
     @alice = create(:alice)
-    sign_in(@alice)
+    login_as(@alice, scope: :user)
   end
 
   test 'visiting the index' do
