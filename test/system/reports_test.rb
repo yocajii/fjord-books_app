@@ -4,9 +4,9 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    FactoryBot.reload
-    @report = create(:report)
-    login_as(@report.user, scope: :user)
+    user = create(:user, name: 'アリス')
+    create(:report, user: user)
+    login_as(user, scope: :user)
   end
 
   test 'visiting the index' do

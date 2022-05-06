@@ -4,9 +4,8 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    FactoryBot.reload
-    @alice = create(:alice)
-    @bob = create(:bob)
+    @alice = create(:user, name: 'アリス')
+    @bob = create(:user, email: 'bob@example.com')
   end
 
   test '#following?_and_@follow' do
@@ -22,9 +21,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test '#unfollow' do
-    relationship = create(:relationship)
-    carol = relationship.following
-    dave = relationship.follower
+    carol = create(:user)
+    dave = create(:user)
+    create(:relationship, following: carol, follower: dave)
     assert dave.following?(carol)
     dave.unfollow(carol)
     assert_not dave.following?(carol)

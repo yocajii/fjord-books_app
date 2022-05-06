@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :relationship do
-    following factory: :carol
-    follower factory: :dave
+    following { nil }
+    follower { nil }
   end
 end

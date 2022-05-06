@@ -4,18 +4,17 @@ require 'application_system_test_case'
 
 class BooksTest < ApplicationSystemTestCase
   setup do
-    FactoryBot.reload
-    @book = create(:book)
-    @alice = create(:alice)
-    login_as(@alice, scope: :user)
+    create(:book, title: '土佐日記', memo: '日記文学', author: '紀貫之')
+    alice = create(:user)
+    login_as(alice, scope: :user)
   end
 
   test 'visiting the index' do
     visit books_url
     assert_selector 'h1', text: '本'
-    assert_text '南総里見八犬伝'
-    assert_text '伝奇小説'
-    assert_text '曲亭馬琴'
+    assert_text '土佐日記'
+    assert_text '日記文学'
+    assert_text '紀貫之'
   end
 
   test 'creating a Book' do
