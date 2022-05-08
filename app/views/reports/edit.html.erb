@@ -1,0 +1,11 @@
+<h1><%= t('views.common.title_edit', name: Report.model_name.human) %></h1>
+
+<p>
+  <strong><%= Report.human_attribute_name(:date) %>:</strong>
+  <%= l @report.created_at.to_date %>
+</p>
+
+<%= render 'form', report: @report %>
+
+<%= link_to t('views.common.show'), @report %> |
+<%= link_to t('views.common.back'), reports_path %>
